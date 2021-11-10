@@ -1,0 +1,60 @@
+[목표]
+중요산출물 결정 후 네이밍
+
+클라우드 아키텍처 설계서*, ~ 11/8
+자산현황(CIS에 따른 중요도 분석, 아키텍처 설계 기반)*
+보안 적용 전 취약점 평가(script 후 가이드대로 조치)
+보안 적용 후 이행 평가, 이행 조치 방법
+모의해킹 시나리오(점검기준 수립)*
+
+[WBS] . . . . 협의중
+11/8 서버 등 인프라 스펙 세부 정의 및 설계, 구축, 설계서 산출
+11/9 자산분석보고서 작성
+11/10 테스트 환경(보안 적용되지 않은 인프라, 서비스) 구축 완료, 기능 테스트
+11/11 취약점 점검 기준 수립(KISA, 샘플 자료, 자산 목록 참고), 모의해킹 시나리오 작성
+11/12 취약점 분석
+
+업로드 목록 : 
+기획서 : ppt 발표자료
+수행계획서 : 멘토 제공
+WBS 작성 : 
+
+
+조상우 : 상우가 보낸 WBS 참조
+스토리보드
+DocumentDB -> 간단하게
+
+우원하 : 설계, 구축
+AWS 클라우드 아키텍처 설계
+-  az-a 에 web, WAS, db(read-only)
+Amazon Macie
+- 가명처리 되지 않은 데이터 점검
+S3
+- DocumentDB 스냅샷 받아서 Macie와 연계
+- S3 Glacier에 일정 기간 지난 데이터 백업
+Artifact
+- ISO 27001, 27002, 27017, 27018 다운로드
+- 
+
+김민지 : 3tier 구성, NACL, SG
+VPC(Transit Gateway), VPN, EC2(spec 정의. 용량 등), 
+
+배슬기 : 
+인증서(SSL, VPN .. 사용목적 명시), 
+암호화 키 관리(column/storage/구간 어느것인지 명세 .. 상세정의 필요)
+ACM, HSM, KMS, Resolver DNS Firewall
+
+박준용 : 방화벽 .. DDoS 대책 강구
+Firewall manager, AWS Shield Standard, Network Firewall(VPC에 있는), WAF(Web ACL), GuardDuty
+
+김진수 : 보안 시각화, 로그관리 .. 어떤 로그를 보고 싶은건지 정의해야 함
+ex) 비밀번호 몇번 틀렸을때 등 정책에 따라
+Security Hub, Secrets Manager, Inspector
+CloudWatch, CloudTrail
+
+
+
+
+
+
+

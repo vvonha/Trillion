@@ -1,0 +1,18 @@
+https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE09910482&mark=0&useDate=&bookmarkCnt=0&ipRange=N&accessgl=Y&language=ko_KR
+
+보안 아키텍처(App, Data, Tech)
+Tech : Network, Security
+
+시스템 구축
+
+취약점 진단 대상 : Infra, OS, DBMS 
+
+1. DNS DDOS 방어대책(EKS 활용)
+2. 컨테이너 위협 보안대책(이슈리포트 참고)
+>> KISA 2021년 사이버 위협 전망 참고
+>> https://falco.org/ko/ : 쿠버네티스 보안
+3. 다크웹(개인정보 침해 탐지)
+>> 다크웹에 유출된 개인정보 탐지, 
+>> Data breaches on DeepWeb: Alerting and Reporting system(8기 10번 참조)
+4. 다크웹 + 쿠버네티스
+5. 4조(관제 서비스)와 협업
