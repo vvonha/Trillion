@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Checkout example · Bootstrap v5.1</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
+
+    <!-- Bootstrap core CSS -->
+<link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <style type="text/css">
+        .tg  {border-collapse:collapse;border-spacing:0;}
+        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:17px;
+          overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:17px;
+          font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg .tg-7dw8{background-color:#34cdf9;border-color:inherit;text-align:left;vertical-align:top}
+        .tg .tg-99c3{background-color:#34cdf9;text-align:left;vertical-align:top}
+        .tg .tg-0lax{text-align:left;vertical-align:top}
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="/static/form-validation.css" rel="stylesheet">
+  </head>
+  <body class="bg-light" onload="check_completed();">
+    
+        <div class="container">
+          <main>
+            <div class="py-5 text-center">
+              <img class="d-block mx-auto mb-4" src="/static\images\sk_shieldus_comm_rgb_en.png" alt="" width="250" height="100">
+              <h4>회원가입 페이지</h4>
+              <p class="lead">회원가입에 필요한 정보들을 작성해주세요.</p>
+            </div>
+
+            <div class="row g-5">
+              <div class="col-md-5 col-lg-4 order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                  <span class="badge bg-primary rounded-pill">3단계</span>
+                  <span class="text-primary">진행 단계</span>
+                </h4>
+                <ul class="list-group mb-3">
+                  <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                      <h6 class="my-0"><b>1단계: </b>정보 제공 동의</h6>
+                      <small class="text-muted">정보 제공에 동의</small>
+                    </div>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                      <h6 class="my-0"><b>2단계: </b>가입 정보 작성</h6>
+                      <small class="text-muted">가입에 필요한 정보들 기입</small>
+                    </div>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between lh-sm" style="background-color:skyblue;">
+                    <div>
+                      <h6 class="my-0"><b>3단계: </b>진단서 업로드</h6>
+                      <small class="text-muted">개인 진단서 보유 시 업로드</small>
+                    </div>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                      <h6 class="my-0"><b>4단계: </b>가입 완료</h6>
+                      <small class="text-muted">최종 가입 완료</small>
+                    </div>
+                  </li>
+                </ul>
+                
+              </div>
+              <div class="col-md-7 col-lg-8">
+                <div class = "container">
+                    <div class="row mt-5">
+                        <h1>진단서 내용 확인</h1>
+                    </div>
+
+                    <table class="tg" width="400">
+                        <thead>
+                            <tr>
+                              <th class="tg-7dw8"><b>항목<b/></th>
+                              <th class="tg-99c3"><b>내용<b/></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                              <td class="tg-0lax"><b>성함</b></td>
+                              <td class="tg-0lax">{{ Patient }}</td>
+                            </tr>
+                            <tr>
+                              <td class="tg-0lax"><b>생년월일</b></td>
+                              <td class="tg-0lax">{{ birth }}</td>
+                            </tr>
+                            <tr>
+                              <td class="tg-0lax"><b>피후견인</b></td>
+                              <td class="tg-0lax">{{ Ward }}</td>
+                            </tr>
+                            <tr>
+                              <td class="tg-0lax"><b>병원명</b></td>
+                              <td class="tg-0lax">{{ Hospital }}</td>
+                            </tr>
+                            <tr>
+                              <td class="tg-0lax"><b>주치의</b></td>
+                              <td class="tg-0lax">{{ Consultant }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br/>
+                    <div class="mb-3 form-check">
+                        <form class="needs-validation" method="POST" action="/register_4" novalidate>
+                            
+                            
+                            <!-- {{username}} {{password}} -->
+                            <input class="form-control" type="hidden" name="username" value={{username}}>
+                            </input>
+                            <input class="form-control" type="hidden" name="password" value={{password}}>
+                            </input>
+
+                            <div>
+                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                <label class="form-check-label" for="invalidCheck">
+                                    <b>위 내용이 맞습니다</b>
+                                </label>
+                                <div class="valid-feedback">
+                                    동의하셨습니다.
+                                </div>
+                                <div class="invalid-feedback">
+                                    필수 동의 항목입니다.
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+                            <button class="btn btn-lg btn-primary" type="submit">다음으로</button>
+                        </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </main>
+
+          <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">&copy; 2017–2021 Company Name</p>
+            <ul class="list-inline">
+              <li class="list-inline-item"><a href="#">Privacy</a></li>
+              <li class="list-inline-item"><a href="#">Terms</a></li>
+              <li class="list-inline-item"><a href="#">Support</a></li>
+            </ul>
+          </footer>
+        </div>
+
+    <script>
+      function check_completed() {
+        alert("검증되었습니다.")
+      }
+    </script>
+
+    <script src="/static/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/form-validation.js"></script>
+  </body>
+</html>
