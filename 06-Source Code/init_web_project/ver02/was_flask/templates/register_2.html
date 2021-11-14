@@ -28,27 +28,6 @@
         }
       }
     </style>
-
-    <!-- Edited -->
-    <!---->>
-    <script>
-    $("#password").on("focusout", function () {
-      if ($(this).val() != $("#password2").val()) {
-        $("#password2").removeClass("valid").addClass("invalid");
-      } else {
-        $("#password2").removeClass("invalid").addClass("valid");
-      }
-    });
-
-    $("#password2").on("keyup", function () {
-      if ($("#password").val() != $(this).val()) {
-        $(this).removeClass("valid").addClass("invalid");
-      } else {
-        $(this).removeClass("invalid").addClass("valid");
-      }
-    });
-    </script>
-
     <!-- Custom styles for this template -->
     <link href="/static/form-validation.css" rel="stylesheet">
   </head>
@@ -115,7 +94,7 @@
               {% endif %}
           </form>
           <br/>
-
+          
             <form class="needs-validation" method="POST" action="/register_3" novalidate>
               <div class="row g-3">
               
@@ -130,7 +109,7 @@
 
                 <div class="col-12">
                   <label for="address" class="form-label">비밀번호</label> <small style="color:red"> *필수</small>
-                  <input type="password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" class="form-control" name="password" id="password" placeholder="-" required>
+                  <input type="password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" class="form-control" name="password" id="password_1" placeholder="-" required>
                   <div class="valid-feedback">
                     사용 가능한 조합입니다.
                   </div>
@@ -145,12 +124,18 @@
 
                 <div class="col-12">
                   <label for="address" class="form-label">비밀번호 확인</label> <small style="color:red"> *필수</small>
-                  <input type="password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" class="form-control" name="password2" id="password2" placeholder="-" required>
+                  <input type="password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" class="form-control" name="password2" id="password_2" placeholder="-" required>
                   <div class="valid-feedback">
                     확인되었습니다.
                   </div>
                   <div class="invalid-feedback">
-                    비밀번호를 다시 확인해주세요.
+                    <!--비밀번호를 다시 확인해주세요.-->
+                  </div>
+                  <div class="alert alert-success" role="alert" id="pw_success_msg">
+                    비밀번호가 일치합니다!
+                  </div>
+                  <div class="alert alert-danger" role="alert" id="pw_warn_msg">
+                    비밀번호가 일치하지 않습니다.
                   </div>
                   <br/>
                 </div>
@@ -334,7 +319,8 @@
               <br/>
               <hr class="my-4">
               <br/>
-              <button class="btn btn-lg btn-primary" type="submit">다음으로</button>
+              <button class="btn btn-lg btn-primary" type="submit" id="nextBtn" name="nextBtn">다음으로</button>
+            
               <br/>
             </form>
             <br/>
@@ -351,6 +337,34 @@
         </ul>
       </footer>
     </div>
+
+    <script>
+      var password = document.getElementById("password_1")
+        , confirm_password = document.getElementById("password_2");
+
+      var nextBtn = document.getElementById('nextBtn');
+      var succ_msg = document.getElementById('pw_success_msg')
+      var warn_msg = document.getElementById('pw_warn_msg')
+      
+      document.getElementById("pw_warn_msg").style.display = 'none'; // 경고 메시지 비활성화
+      document.getElementById('pw_success_msg').style.display = 'none'; // 성공 메시지 비활성화
+
+      function validatePassword(){
+        if(password.value != confirm_password.value) {
+          nextBtn.disabled = true; // 다음으로 비활성화
+          document.getElementById("pw_warn_msg").style.display = ''; // 경고 메시지 활성화
+          document.getElementById('pw_success_msg').style.display = 'none'; // 성공 메시지 비활성화
+          confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+          nextBtn.disabled = false; // 다음으로 활성화
+          document.getElementById("pw_warn_msg").style.display = 'none'; // 경고 메시지 비활성화
+          document.getElementById('pw_success_msg').style.display = ''; // 성공 메시지 활성화
+          confirm_password.setCustomValidity('');
+        }
+      }
+      password.onchange = validatePassword;
+      confirm_password.onkeyup = validatePassword;
+    </script>
 
     <script src="/static//dist/js/bootstrap.bundle.min.js"></script>
     <script src="/static/form-validation.js"></script>
