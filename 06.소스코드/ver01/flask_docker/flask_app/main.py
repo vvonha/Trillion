@@ -30,8 +30,6 @@ app.config['UPLOAD_FOLDER'] = './'
 # Home (Sign in)
 @app.route('/') # 접속할 URL
 def home():
-    return render_template('pricing.html')
-    return "testtest"
     return redirect('/service/')
 
 # @login_manager.user_loader:
