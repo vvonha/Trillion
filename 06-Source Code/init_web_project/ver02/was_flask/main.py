@@ -30,11 +30,16 @@ app.config['UPLOAD_FOLDER'] = './'
 # Home (Sign in)
 @app.route('/') # 접속할 URL
 def home():
-    return redirect('/service/signin')
+    return redirect('/service/')
 
+# @login_manager.user_loader:
+# def load_user(user_id):
+#     print('\n@user_id:',user_id,'\n')
+#     return User.get(user_id)
 @login_manager.user_loader
-def load_user(user_id):
-    return User.get(user_id)
+def load_user(username):
+    print('\n@user_name:',username,'\n')
+    return User.find(username)
 
 @login_manager.unauthorized_handler
 def unauthorized():
@@ -45,6 +50,6 @@ def unauthorized():
 #     if 'client_id' not in session:
 #         session['client_id'] = request.environ.get(
 #             'HTTP_X_REAL_IP', request.remote_addr)
-
+    
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000', debug=True)

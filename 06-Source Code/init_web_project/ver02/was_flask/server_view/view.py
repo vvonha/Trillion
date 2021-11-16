@@ -1,9 +1,10 @@
-import re
 from flask import Flask, Blueprint, json, request, render_template, make_response, jsonify, redirect, url_for
 from flask_login import login_user, current_user, logout_user
 from flask_login.utils import login_required
+from pymysql import NULL
 from server_controller.user_setting import User
 import os
+import re
 
 import datetime
 
@@ -12,7 +13,7 @@ acc_obj = Blueprint('account', __name__)
 
 from main import app
 # app.config['UPLOAD_FOLDER'] = './'
-
+@main_obj.route('/') # 접속할 URL
 @main_obj.route('/signin', methods=['GET','POST'])
 def signin():
     # username='-'; password='-'
@@ -23,6 +24,10 @@ def signin():
             # session에서 username 추출 및 반환
             print(current_user.username,':',type(current_user.username))
             print(current_user.username,':',type(current_user.username.decode('utf8')))
+            
+            # Test 출력
+            print('current_user :',current_user.username)
+            return
             username=request.form['username']
             print('TEST1:',username)
             print('TEST2:',current_user.username)
@@ -33,14 +38,28 @@ def signin():
             # return render_template('signin.html', username=current_user.username.decode('utf8'))
             # return render_template('signin.html', username=current_user.username)
         else:
+            print('TEST2:',current_user)
             return render_template('signin.html', flag=False)
 
     elif request.method == 'POST':
+        username=request.form['username']
+        # if  load_user(username) != NULL:
+        #     print('@@username', username)
+            
+        print(current_user.is_authenticated)
+        if current_user.is_authenticated:
+            print('1',current_user.username,':',type(current_user.username))
+            print(current_user.username,':',type(current_user.username.decode('utf8')))
+            print(current_user)
+            print('current_user :',current_user.username)
         # username='-'; password='-'
         username=request.form['username']
         password=request.form['password']
         print('username2 : ', username)
         print('password : ', password)
+        print('------------------------')
+        print('current_user :',current_user)
+        
         # print('direct_flag : ', request.form['direct_flag'])
 
         # user = User.find(request.form['username'], request.form['password'])
@@ -51,6 +70,7 @@ def signin():
         #     return render_template('signin.html', warning='존재하지 않는 계정입니다')
         else:
             login_user(user, remember=True, duration=datetime.timedelta(minutes=5))
+            print('@logged in !!')
             # direct_flag=request.form['direct_flag']
             # print(111)
             # if(direct_flag):
@@ -60,7 +80,7 @@ def signin():
         # return redirect('/service/signin')
         return render_template('signin.html', username=username, flag=False)
 
-@main_obj.route('/logout', methods=['GET','POST'])
+@main_obj.route('/logout')
 def logout():
     logout_user()
     return redirect('/service/signin')

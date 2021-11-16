@@ -16,6 +16,7 @@ class User(UserMixin):
  
     @staticmethod
     def get(id):
+        print('\n@GET:','get','\n')
         mysql_db = conn_mysqldb()
         mysql_db_cursor = mysql_db.cursor()
         sql = "SELECT * \
