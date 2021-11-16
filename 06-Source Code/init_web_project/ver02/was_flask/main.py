@@ -27,12 +27,10 @@ login_manager.session_protection = 'strong'
 
 app.config['UPLOAD_FOLDER'] = './'
 
-
-# 테스트 검증 완료
+# Home (Sign in)
 @app.route('/') # 접속할 URL
 def home():
     return redirect('/service/signin')
-
 
 @login_manager.user_loader
 def load_user(user_id):

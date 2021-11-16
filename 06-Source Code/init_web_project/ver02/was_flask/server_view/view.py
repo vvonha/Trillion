@@ -68,7 +68,7 @@ def logout():
 @main_obj.route('/register', methods=['GET','POST'])
 def register():
     if request.method =='GET':
-    	return render_template('register.html')
+    	return render_template('/register/reg_step_1.html')
 
     elif request.method == 'POST':
         print('username : ', request.form['username'])
@@ -92,11 +92,11 @@ def product():
 # 테스트 검증 완료
 @acc_obj.route('/register_1', methods=['GET','POST']) # 접속할 URL
 def register_level_1():
-	return render_template('register_1.html')
+	return render_template('/register/reg_step_1.html')
 
 @acc_obj.route('/register_2', methods=['GET','POST']) # 접속할 URL
 def register_level_2():
-    return render_template('register_2.html', sort=3, username='-')
+    return render_template('/register/reg_step_2.html', sort=3, username='-')
 
 # [ id 검증 함수 ]
 @acc_obj.route('/examine_id_value', methods=['GET','POST']) # 접속할 URL
@@ -106,9 +106,9 @@ def examine_id_value():
     user=User.find(username)
     print(user)
     if(user == None):
-        return render_template('register_2.html', sort=1, username=username)
+        return render_template('/register/reg_step_2.html', sort=1, username=username)
     else:
-        return render_template('register_2.html', sort=2, username='-')
+        return render_template('/register/reg_step_2.html', sort=2, username='-')
 
 @acc_obj.route('/register_3', methods=['GET','POST']) # 접속할 URL
 def register_level_3():
@@ -122,7 +122,7 @@ def register_level_3():
     # 58-64
     # 91-96
     # for(pass)
-    return render_template('register_3.html', username=username, password=password)
+    return render_template('/register/reg_step_3.html', username=username, password=password)
 
 def examine(text, str, start_idx, end_str):
         print(str)
@@ -178,7 +178,7 @@ def register_level_3_temp():
     
     
     # result(검증 문자열) 추가된 것 확인
-    return render_template('register_3_validation.html', username=username, password=password, 
+    return render_template('/register/reg_step_3_valid.html', username=username, password=password, 
                            Patient=Patient, birth=birth, Ward=Ward, Hospital=Hospital, Consultant=Consultant)
 
 @acc_obj.route('/register_4', methods=['GET','POST']) # 접속할 URL
@@ -190,7 +190,7 @@ def register_level_4():
     password=request.form['password']
     
     User.create(request.form['username'], request.form['password'])
-    return render_template('register_4.html', username=username, password=password)
+    return render_template('/register/reg_step_4.html', username=username, password=password)
 
 @acc_obj.route('/complete', methods=['GET','POST']) # 접속할 URL
 def register_complete():
