@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  flask:
+    build: ./mydocker
+    restart: always
+    container_name: myscanner
