@@ -5,3 +5,7 @@ services:
     build: ./mydocker
     restart: always
     container_name: myscanner
+    ports:
+      - "80:80"
+    volumes:
+      - ./mydocker/templates:/usr/share/nginx/html

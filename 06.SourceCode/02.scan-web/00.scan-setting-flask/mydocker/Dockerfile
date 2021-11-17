@@ -1,8 +1,8 @@
 # 1. Based on the Docker image of the latest of Python3, 
 FROM python:3.8
 
-COPY . ./mytestfolder
-WORKDIR ./mytestfolder
+COPY . ./mywork
+WORKDIR ./mywork
 
 # 2. tesseract and dependent libraries to install in Apt, 
 RUN apt-get update
@@ -18,8 +18,8 @@ RUN pip install --upgrade pip; \
      pip install \
      opencv-contrib-python \
      pillow \
-     pytesseract
-
+     pytesseract \
+     flask
 
 ENTRYPOINT ["/usr/bin/tail", "-f", "/dev/null"]
-CMD ["python3", "app.py"]
+# CMD ["python3", "app.py"]
