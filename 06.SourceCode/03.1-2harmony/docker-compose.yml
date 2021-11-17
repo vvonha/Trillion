@@ -32,6 +32,7 @@ services:
     build: ./mydocker
     restart: always
     container_name: myscanner
-    command: gunicorn -w 1 -b 0.0.0.0:80 wsgi:app
+    #command: gunicorn -w 1 -b 0.0.0.0:80 wsgi:app
+    command: python wsgi.py
     volumes:
       - ./mydocker/templates:/usr/share/nginx/html
