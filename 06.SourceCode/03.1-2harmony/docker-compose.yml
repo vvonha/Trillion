@@ -4,8 +4,6 @@ services:
   nginxproxy:
     depends_on:
       - nginx
-      - db
-      - wordpress
     image: nginx:alpine
     container_name: proxyserver 
     restart: always 
@@ -30,43 +28,10 @@ services:
     volumes:
       - ./flask_docker/flask_app/templates:/usr/share/nginx/html
 
-  db:
-    image: mysql:5.7
-    container_name: mysqldb 
-    volumes:
-      - mydb:/var/lib/mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: somewordpress
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
-
-  wordpress:
-    depends_on:
-      - db
-    build:
-      context: ./wp
-      dockerfile: Dockerfile
-    container_name: wp
-    restart: always
-    volumes:
-      - ./html:/var/www/html
-    environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_DB_NAME: wordpress
-
   scanner:
     build: ./mydocker
     restart: always
     container_name: myscanner
     command: gunicorn -w 1 -b 0.0.0.0:80 wsgi:app
-    ports:
-      - "80:80"
     volumes:
       - ./mydocker/templates:/usr/share/nginx/html
-
-volumes:
-  mydb:

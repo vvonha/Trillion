@@ -23,5 +23,5 @@ RUN pip install --upgrade pip; \
      gunicorn
 #     python3-flask
 
-ENTRYPOINT ["/usr/bin/tail", "-f", "/dev/null"]
+# ENTRYPOINT ["/usr/bin/tail", "-f", "/dev/null"]
 # CMD ["python3", "app.py"]
