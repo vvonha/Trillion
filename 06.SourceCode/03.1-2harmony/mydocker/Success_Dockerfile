@@ -1,0 +1,22 @@
+# 1. Based on the Docker image of the latest of Python3, 
+ FROM python:latest
+
+ COPY . ./mytestfolder
+ WORKDIR ./mytestfolder
+
+# 2. tesseract and dependent libraries to install in Apt, 
+ RUN apt-get update
+ RUN apt-get -y install \
+     tesseract-ocr \
+     tesseract-ocr-jpn
+ RUN apt-get clean
+
+
+# 3. install the required python library in Pip 
+ RUN pip install --upgrade pip; \
+     pip install \
+     pillow \
+     pytesseract
+
+
+ENTRYPOINT ["/usr/bin/tail", "-f", "/dev/null"]

@@ -20,6 +20,7 @@ RUN pip install --upgrade pip; \
      pillow \
      pytesseract \
      flask
+#     python3-flask
 
 ENTRYPOINT ["/usr/bin/tail", "-f", "/dev/null"]
 # CMD ["python3", "app.py"]
