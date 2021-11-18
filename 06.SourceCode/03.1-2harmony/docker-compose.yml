@@ -24,7 +24,7 @@ services:
     build: ./flask_docker
     restart: always
     container_name: myflask
-    command: gunicorn -w 1 -b 0.0.0.0:80 wsgi:app
+    command: python wsgi.py
     volumes:
       - ./flask_docker/flask_app/templates:/usr/share/nginx/html
 
