@@ -1,0 +1,13 @@
+설명서
+
+[Bastion EC2 : Nginx]
+1. AWS Ubuntu:20.04 인스턴스 생성
+2. nlb 생성
+3. nginx.conf의 프록시 패스 nlb 도메인 업데이트
+4. (04)docker-nginx_# 도커 컴포징
+
+[WAS EC2 : Docker-Compose(nginx->flask)]
+1. AWS Ubuntu:20.04 인스턴스 생성
+2. (03)flask_one_two_harmony_# 도커 컴포징
+
+f. login 창 출력 확인

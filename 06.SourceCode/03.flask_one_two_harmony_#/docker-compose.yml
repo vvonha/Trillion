@@ -26,7 +26,7 @@ services:
     container_name: myflask
     command: python wsgi.py
     volumes:
-      - ./flask_docker/flask_app/templates:/usr/share/nginx/html
+      - ./flask_docker/flask_app:/usr/share/nginx/html
 
   scanner:
     build: ./mydocker

@@ -5,3 +5,7 @@ dc(bh-api-db) 통합 업로드
 - docker(container) 환경 적용 및 분산 적용중
 (docker-compose / kubernetes)
 - nginx 디렉토리 인식 에러 수정중
+
+-------------------------------------------------
+
+- migration 진행중
