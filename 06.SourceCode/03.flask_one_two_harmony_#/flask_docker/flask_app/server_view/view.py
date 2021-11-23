@@ -9,7 +9,6 @@ import re
 import datetime
 # from main import app
 
-
 main_obj = Blueprint('service', __name__)
 acc_obj = Blueprint('account', __name__)
 
@@ -19,23 +18,10 @@ acc_obj = Blueprint('account', __name__)
 @main_obj.route('/signin', methods=['GET','POST'])
 def signin():
     if request.method =='GET':
-        if current_user.is_authenticated:
-            username=request.form['username']
-            return render_template('signin.html', username=username)
-        else:
-            print('TEST2:',current_user)
-            return render_template('signin.html')
+        print('@TEST :',current_user)
+        return redirect(url_for('service.home'))
 
     elif request.method == 'POST':
-        username=request.form['username']
-            
-        print(current_user.is_authenticated)
-        if current_user.is_authenticated:
-            print('1',current_user.username,':',type(current_user.username))
-            print(current_user.username,':',type(current_user.username.decode('utf8')))
-            print(current_user)
-            print('current_user :',current_user.username)
-
         # +++++ DB interact code +++++
         username=request.form['username']
         password=request.form['password']
@@ -45,15 +31,16 @@ def signin():
         else:
             login_user(user, remember=True, duration=datetime.timedelta(minutes=5))
             print('@logged in !!')
+            print('@auth :', current_user.is_authenticated)
+            return redirect(url_for('service.home'))
         
-        # return redirect(url_for('service.signin'))
-        # return redirect('/service/signin')
-        return render_template('signin.html', username=username)
+        # return render_template('signin.html', username=username)
 
 @main_obj.route('/home')
 def home():
     print('home :', current_user.is_authenticated)
     if current_user.is_authenticated:
+        print('@성공 : 확인 요망 !!')
         return render_template('signin.html', username=current_user.username)
     else:
         return render_template('signin.html')

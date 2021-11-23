@@ -39,7 +39,7 @@ class User(UserMixin):
         
         sql = """SELECT * \
                 FROM user_data_table \
-                WHERE user = HEX(AES_ENCRYPT('%s', '%s'))""" % (str(username), MY_SALT_VALUE)
+                WHERE user = '%s'""" % (str(username))
         # sql = "SELECT * \
         #         FROM user_data_table \
         #         WHERE user = '%s' \
@@ -88,10 +88,10 @@ class User(UserMixin):
         #         FROM user_data_table \
         #         WHERE user = AES_ENCRYPT('%s', 'SKSHIELDUS') \
         #         and pw = SHA2('%s',256);" % (str(username), str(password))
-        sql = """SELECT id, AES_DECRYPT(UNHEX(user), '%s'), pw
+        sql = """SELECT id, user, pw
                 FROM user_data_table
-                WHERE user = HEX(AES_ENCRYPT('%s', '%s'))
-                and pw = SHA2('%s', 256);""" % (MY_SALT_VALUE, str(username), MY_SALT_VALUE, str(password))
+                WHERE user = '%s'
+                and pw = '%s'""" % (str(username), str(password))
                 
         # print(username, password)
         # print(sql)
@@ -135,25 +135,11 @@ class User(UserMixin):
         mysql_db_cursor = mysql_db.cursor()
         # sql = """INSERT INTO user_data_table (user, pw) \
         #         VALUES (AES_ENCRYPT("%s", "%s"), AES_ENCRYPT("%s", SHA2("%s",256)) )""" % (str(username), MY_SALT_VALUE, str(password), MY_SALT_VALUE)
-        sql = """INSERT INTO user_data_table (user, pw)
-                VALUES (HEX(AES_ENCRYPT('%s', '%s')), SHA2('%s',256) );""" % (str(username), MY_SALT_VALUE, str(password))
+        sql = """INSERT INTO user_data_table (user, pw) \
+                VALUES ('%s', '%s') """ % (str(username), str(password))
         mysql_db_cursor.execute(sql)
         mysql_db.commit()
         
         # 생성된 정보에 대해 find(정보) 전달
         # return User.find(username, password)
         return User.search(username, password)
-    
-        # user = User.find(username)
-        # if user == None:
-        #     mysql_db = conn_mysqldb()
-        #     mysql_db_cursor = mysql_db.cursor()
-        #     sql = "INSERT INTO user_info_table (username) \
-        #             VALUES ('%s')" % str(username)
-        #     mysql_db_cursor.execute(sql)
-        #     mysql_db.commit()
-        #     return User.find(username)
-        # else:
-        #     return user # 이미 있던 것 return
-            
-    # mysql_db_cursor.close()
