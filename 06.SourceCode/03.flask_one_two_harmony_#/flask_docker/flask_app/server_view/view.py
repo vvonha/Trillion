@@ -18,35 +18,16 @@ acc_obj = Blueprint('account', __name__)
 @main_obj.route('/') # 접속할 URL
 @main_obj.route('/signin', methods=['GET','POST'])
 def signin():
-    # username='-'; password='-'
     if request.method =='GET':
-        # print('username : ', request.form['username'])
-        # print('password : ', request.form['password'])
         if current_user.is_authenticated:
-            # session에서 username 추출 및 반환
-            print(current_user.username,':',type(current_user.username))
-            print(current_user.username,':',type(current_user.username.decode('utf8')))
-            
-            # Test 출력
-            print('current_user :',current_user.username)
-            # return
             username=request.form['username']
-            print('TEST1:',username)
-            print('TEST2:',current_user.username)
-            flag=request.form['flag']
-            print('flag :',flag)
-            
-            return render_template('signin.html', username=username, flag=False)
-            # return render_template('signin.html', username=current_user.username.decode('utf8'))
-            # return render_template('signin.html', username=current_user.username)
+            return render_template('signin.html', username=username)
         else:
             print('TEST2:',current_user)
-            return render_template('signin.html', flag=False)
+            return render_template('signin.html')
 
     elif request.method == 'POST':
         username=request.form['username']
-        # if  load_user(username) != NULL:
-        #     print('@@username', username)
             
         print(current_user.is_authenticated)
         if current_user.is_authenticated:
@@ -54,42 +35,26 @@ def signin():
             print(current_user.username,':',type(current_user.username.decode('utf8')))
             print(current_user)
             print('current_user :',current_user.username)
-        # username='-'; password='-'
+
+        # +++++ DB interact code +++++
         username=request.form['username']
         password=request.form['password']
-        print('username2 : ', username)
-        print('password : ', password)
-        print('------------------------')
-        print('current_user :',current_user)
-        
-        # print('direct_flag : ', request.form['direct_flag'])
-
-        # user = User.find(request.form['username'], request.form['password'])
-        
-        # +++++ DB interact code +++++
         user = User.examine(username, password)
         if(user == None):
-            return render_template('signin.html', warning='아이디 및 비밀번호 오류입니다', remainUser=username, flag=False)
-        # elif(user == 'test'):
-        #     return render_template('signin.html', warning='존재하지 않는 계정입니다')
+            return render_template('signin.html', warning='아이디 및 비밀번호 오류입니다', remainUser=username)
         else:
             login_user(user, remember=True, duration=datetime.timedelta(minutes=5))
             print('@logged in !!')
-            # direct_flag=request.form['direct_flag']
-            # print(111)
-            # if(direct_flag):
-            #     logout_user()
         
         # return redirect(url_for('service.signin'))
         # return redirect('/service/signin')
-        return render_template('signin.html', username=username, flag=False)
+        return render_template('signin.html', username=username)
 
-@main_obj.route('/home', methods=['GET','POST'])
+@main_obj.route('/home')
 def home():
-    # username=request.form['username']
-    if request.method =='GET':
-        return render_template('signin.html')
-    
+    print('home :', current_user.is_authenticated)
+    if current_user.is_authenticated:
+        return render_template('signin.html', username=current_user.username)
     else:
         return render_template('signin.html')
         
@@ -231,4 +196,4 @@ def register_complete():
     print('password : ', request.form['password'])
     username=request.form['username']
     password=request.form['password']
-    return render_template('signin.html', username=username, password=password, flag=True)
+    return render_template('signin.html', username=username, password=password)
