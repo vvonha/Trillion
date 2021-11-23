@@ -32,8 +32,9 @@
     <!-- Custom styles for this template -->
     <link href="/static/signin.css" rel="stylesheet">
   </head>
-  <body class="text-center">
   
+  <body class="text-center">
+
     <script>
     function button1_click(s) {
       alert("로그아웃 되었습니다")
@@ -43,7 +44,9 @@
     {% if (username != null) and (flag == false) %}
     <main class="form-signin">
       <form method="GET" action="/service/product">
-        <img class="mb-4" src="/static/images/skhealers_logo.png" alt="" width="250" height="113">
+        <a href="/service/home">
+          <img class="mb-4" src="/static/images/skhealers_logo.png" alt="" width="250" height="113">
+        </a>
         <h5 class="h4 mb-3 fw-normal">환영합니다. <b style="color:blue">user(</b><b>{{ username }}</b><b style="color:blue">)님</b></h5>
         <button class="w-100 btn btn-lg btn-info" type="submit">상품 목록</button>
       </form>
@@ -62,7 +65,9 @@
     {% else %}
     <main class="form-signin">
       <form method="POST" action="/service/signin">
-        <img class="mb-4" src="/static/images/skhealers_logo.png" alt="" width="250" height="113">
+        <a href="/service/home">
+          <img class="mb-4" src="/static/images/skhealers_logo.png" alt="" width="250" height="113">
+        </a>
         <h1 class="h3 mb-3 fw-normal">사용자 로그인</h1>
         {% if warning != null %}
         <b style="color:red">{{ warning }}</b>

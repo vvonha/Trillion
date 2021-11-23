@@ -84,6 +84,15 @@ def signin():
         # return redirect('/service/signin')
         return render_template('signin.html', username=username, flag=False)
 
+@main_obj.route('/home', methods=['GET','POST'])
+def home():
+    # username=request.form['username']
+    if request.method =='GET':
+        return render_template('signin.html')
+    
+    else:
+        return render_template('signin.html')
+        
 @main_obj.route('/logout')
 def logout():
     logout_user()
