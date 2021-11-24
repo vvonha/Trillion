@@ -18,10 +18,12 @@ acc_obj = Blueprint('account', __name__)
 @main_obj.route('/signin', methods=['GET','POST'])
 def signin():
     if request.method =='GET':
-        print('@TEST :',current_user)
+        print('@GET :',current_user)
         return redirect(url_for('service.home'))
 
     elif request.method == 'POST':
+        print('@POST :',current_user)
+        
         # +++++ DB interact code +++++
         username=request.form['username']
         password=request.form['password']
@@ -31,8 +33,8 @@ def signin():
         else:
             login_user(user, remember=True, duration=datetime.timedelta(minutes=5))
             print('@logged in !!')
-            print('@auth :', current_user.is_authenticated)
-            return redirect(url_for('service.home'))
+            return render_template('signin.html', username=username)
+            # return redirect(url_for('service.home'), username=username)
         
         # return render_template('signin.html', username=username)
 
