@@ -9,6 +9,8 @@ import re
 import datetime
 # from main import app
 
+from app import texting
+
 main_obj = Blueprint('service', __name__)
 acc_obj = Blueprint('account', __name__)
 
@@ -53,6 +55,31 @@ def signin():
             # return redirect(url_for('service.home'), username=username)
         
         # return render_template('signin.html', username=username)
+
+# ---------------------------------------------------------------------------------------
+@main_obj.route('/scan_page')
+def scan_page():
+    return render_template('scan.html')
+
+@main_obj.route('/scan', methods=['GET','POST'])
+def scan():
+    print('# 스캔 로직 작동중...')
+    
+    file = request.files['file']
+    file_and_path = os.path.join('./', file.filename)
+    file.save(file_and_path)
+    print('# 업로드 완료...')
+    
+    # opened_file = open(file_and_path, 'r', encoding='UTF8')
+    # text=''.join(opened_file.readlines())
+    # text=opened_file.readlines()
+    # print(text)
+    temp = texting(file_and_path)
+    print(temp)
+    print('# 텍스팅 처리 완료...')
+    
+    return redirect('#')
+# ---------------------------------------------------------------------------------------
 
 @main_obj.route('/home')
 def home():
