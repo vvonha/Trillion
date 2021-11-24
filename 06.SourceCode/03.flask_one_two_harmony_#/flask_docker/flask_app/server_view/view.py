@@ -24,10 +24,26 @@ def signin():
     elif request.method == 'POST':
         print('@POST :',current_user)
         
-        # +++++ DB interact code +++++
+        # +++ DB interact code +++
         username=request.form['username']
         password=request.form['password']
-        user = User.examine(username, password)
+        
+        # +++ Exception +++
+        if username.find('\'') >= 0 or username.find('\"') >= 0 or password.find('\'') >= 0 or password.find('\"') >= 0:
+            username = username.replace('\'','')
+            password = password.replace('\'','')
+            # --- --- --- --- ---
+            username = username.replace('\"','')
+            password = password.replace('\"','')
+            return render_template('signin.html', warning='사용 불가능한 문자가 섞여있습니다.', remainUser=username)
+        else:
+            user = User.examine(username, password)
+        
+        # try :
+        #     user = User.examine(username, password)
+        # except Exception as e:
+        #     print('입력 단계에서 예외가 발생했습니다.', e)
+        
         if(user == None):
             return render_template('signin.html', warning='아이디 및 비밀번호 오류입니다', remainUser=username)
         else:
