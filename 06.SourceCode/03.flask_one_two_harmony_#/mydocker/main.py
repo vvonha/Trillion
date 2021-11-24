@@ -26,7 +26,7 @@ def scan():
     print(temp)
     print('# 텍스팅 처리 완료...')
     
-    return redirect('/')
+    return redirect('#')
 
     # if "Patient's Name:" in text:
     #     print('Exist!')

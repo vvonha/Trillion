@@ -62,7 +62,7 @@ def home():
         return render_template('signin.html', username=current_user.username)
     else:
         return render_template('signin.html')
-        
+
 @main_obj.route('/logout')
 def logout():
     logout_user()
@@ -92,6 +92,11 @@ def product():
 
 # --------------------------------------------------------------------
 # 테스트 검증 완료
+
+@acc_obj.route('/scan')
+def scan():
+    return redirect('http://localhost:5000')
+
 @acc_obj.route('/register_1', methods=['GET','POST']) # 접속할 URL
 def register_level_1():
 	return render_template('/register/reg_step_1.html')
