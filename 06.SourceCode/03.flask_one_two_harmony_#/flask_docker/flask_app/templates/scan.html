@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Scan Page</title>
+  </head>
+  <body class="bg-light" onload="check_completed();">
+      <div class="container">
+          <form class="needs-validation" method="POST" action="/scan" enctype="multipart/form-data" novalidate>
+                <div>
+                  <label for="formFile" class="form-label">보유한 진단서를 업로드해주세요</label>
+                  <br/>
+                  <input class="form-control" type="file" id="formFile" name="file" required>
+                  </input>
+                </div>
+                <br/>
+                
+                <button class="btn btn-warning" type="submit">업로드</button>
+          </form>
+      </div>
+             
+    <script>
+      function check_completed() {
+        //alert("검증되었습니다.")
+      }
+    </script>
+
+  </body>
+</html>
