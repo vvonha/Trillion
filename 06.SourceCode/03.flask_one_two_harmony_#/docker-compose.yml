@@ -2,8 +2,8 @@ version: "3"
 
 services:
   nginxproxy:
-    depends_on:
-      - nginx
+    # depends_on:
+    #   - nginx
     image: nginx:alpine
     container_name: proxyserver 
     restart: always 
@@ -14,12 +14,12 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./myweb:/usr/share/nginx/html
 
-  nginx:
-    image: nginx:latest
-    container_name: mywebserver 
-    restart: always
-    volumes:
-      - ./myweb:/usr/share/nginx/html
+  # nginx:
+  #   image: nginx:latest
+  #   container_name: mywebserver 
+  #   restart: always
+  #   volumes:
+  #     - ./myweb:/usr/share/nginx/html
 
   flask:
     build: ./flask_docker
