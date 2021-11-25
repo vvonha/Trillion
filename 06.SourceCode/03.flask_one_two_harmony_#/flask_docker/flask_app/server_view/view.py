@@ -105,9 +105,9 @@ def register_level_2():
 @acc_obj.route('/examine_id_value', methods=['GET','POST']) # 접속할 URL
 def examine_id_value():
     username=request.form['username']
-    print('\n\nTTTTTTEST:',username,'\n\n')
+    # print('\nTEST:',username,'\n')
     user=User.find(username)
-    print(user)
+    # print(user)
     if(user == None):
         return render_template('/register/reg_step_2.html', sort=1, username=username)
     else:
@@ -121,10 +121,6 @@ def register_level_3():
     username=request.form['username']
     password=request.form['password']
     
-    # 33-47
-    # 58-64
-    # 91-96
-    # for(pass)
     return render_template('/register/reg_step_3.html', username=username, password=password)
 
 def examine(text, str, start_idx, end_str):

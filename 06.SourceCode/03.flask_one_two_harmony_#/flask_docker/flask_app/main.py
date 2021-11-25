@@ -1,5 +1,5 @@
 import re
-from flask import Flask, jsonify, request, render_template, make_response, session, redirect, url_for
+from flask import Flask, jsonify, request, render_template, make_response, session, redirect, url_for, flash
 from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 # from flask_cors import CORS
 from werkzeug.utils import secure_filename
@@ -72,7 +72,10 @@ def scan_page():
 
 @app.route('/scan', methods=['GET','POST'])
 def scan(): 
-    return redirect('/service/')
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect('#')
+    
     # username=request.args.get('username', type = str)
     # password=request.args.get('password', type = str)
     username=request.form['username']
