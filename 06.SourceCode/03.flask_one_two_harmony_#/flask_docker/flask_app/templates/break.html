@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Scan Page</title>
+  </head>
+  <body class="bg-light" onload="check_completed();">
+      <div class="container">
+          <form class="needs-validation" method="POST" action="/break" novalidate>
+
+                <!-- {{username}} {{password}} -->
+                <input type="hidden" name="username" value={{username}}>
+                </input>
+                <input type="hidden" name="password" value={{password}}>
+                </input>
+                <input type="hidden" name="temp" value={{temp}}>
+                </input>
+
+                {{username}}<br>
+                {{password}}<br>
+                {{temp}}<br>
+
+                <div>
+                  <label class="form-label">break 페이지 입니다</label>
+                  <br/>
+                </div>
+
+                <br/>
+                
+                <button class="btn btn-warning" type="submit">다음으로</button>
+          </form>
+      </div>
+             
+    <script>
+      function check_completed() {
+        //alert("검증되었습니다.")
+      }
+    </script>
+
+  </body>
+</html>
