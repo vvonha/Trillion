@@ -83,14 +83,41 @@
                 </div>
 
                 <br/>
-                <div class="mb-3 form-check">
-                    <form class="needs-validation" method="POST" action="/account/register_3_validation" enctype="multipart/form-data" novalidate>
-                        <div>
-                          <label for="formFile" class="form-label">양식을 
-                          <a href="https://t-web-static-file.s3.ap-northeast-2.amazonaws.com/static/sample.docx">다운로드</a>하고,</label>
-                          <br/>
 
-                          <label for="formFile" class="form-label">작성한 진단서를 <b style="color:red">"캡처 후"</b> 업로드해주세요</label>
+<!--
+                <form method="POST" action="/scan_page">
+                    <input class="form-control" type="hidden" name="username" value={{username}}>
+                    </input>
+                    <input class="form-control" type="hidden" name="password" value={{password}}>
+                    </input>
+
+                    <button class="btn btn-danger" type="submit">TEST BUTTON</button>
+                </form>
+-->
+
+                <div class="mb-3 form-check">
+
+                    <!-- @Test Lines -->
+                    <label for="formFile" class="form-label">양식을 
+                    <a href="https://t-web-static-file.s3.ap-northeast-2.amazonaws.com/static/sample.docx">다운로드</a>하고,</label>
+                    <br/>
+                    <label for="formFile" class="form-label">작성한 진단서를 <b>"캡처 후"</b> 업로드해주세요</label>
+                    <br/>
+
+                    <br/>
+                    <label for="formFile" class="form-label"><b sytle="color:blue">샘플 이미지 보기(.png)</b></label>
+                    <br/>
+                    <!-- @focusing on target-->
+                    <a class="btn btn-secondary" target='_blank' type="submit" href="https://t-web-static-file.s3.ap-northeast-2.amazonaws.com/sample_img_file/1-RECITAL.png">샘플1</a>
+                    <a class="btn btn-secondary" target='_blank' type="submit" href="https://t-web-static-file.s3.ap-northeast-2.amazonaws.com/sample_img_file/2-RECITAL.png">샘플2</a>
+                    <a class="btn btn-secondary" target='_blank' type="submit" href="https://t-web-static-file.s3.ap-northeast-2.amazonaws.com/sample_img_file/3-RECITAL.png">샘플3</a>
+                    <br/>
+                    <br/>
+
+                    <form class="needs-validation" method="POST" action="/scan" enctype="multipart/form-data" novalidate>
+                        <div>
+                          
+                          
                           <input class="form-control" type="file" id="formFile" name="file" required>
                           </input>
                           <div class="invalid-feedback">

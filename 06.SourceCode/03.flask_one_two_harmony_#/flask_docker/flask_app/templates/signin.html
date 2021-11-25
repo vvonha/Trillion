@@ -64,10 +64,12 @@
     
     {% else %}
     <main class="form-signin">
+
       <form method="POST" action="/service/signin">
         <a href="/service/home">
           <img class="mb-4" src="/static/images/skhealers_logo.png" alt="" width="250" height="113">
         </a>
+
         <h1 class="h3 mb-3 fw-normal">사용자 로그인</h1>
         {% if warning != null %}
         <b style="color:red">{{ warning }}</b>

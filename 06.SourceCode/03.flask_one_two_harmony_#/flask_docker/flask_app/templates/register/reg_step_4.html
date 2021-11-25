@@ -87,17 +87,15 @@
 
           <div class="col-12">
               <br>
-              <form class="needs-validation" method="POST" action="/account/complete" novalidate>
+              <!-- <form class="needs-validation" method="POST" action="/account/complete" novalidate> -->
+              <form class="needs-validation" method="GET" action="/service/home" novalidate>
         
                   <!-- {{username}} {{password}} -->
 
                   <input class="form-control" type="hidden" name="username" value={{username}}>
                   </input>
-                  <input class="form-control" type="hidden" name="password" value={{password}}>
-                  </input>
-
-                  <input class="form-control" type="hidden" name="direct_flag" value="True">
-                  </input>
+                  <!-- <input class="form-control" type="hidden" name="password" value={{password}}>
+                  </input> -->
 
                 <h3>로그인</h3>
                 <button type="submit" class="btn btn-lg btn-primary">하러가기</button>

@@ -125,8 +125,8 @@
 
                     <br/>
                     <div class="mb-3 form-check">
+                        
                         <form class="needs-validation" method="POST" action="/account/register_4" novalidate>
-                            
                             
                             <!-- {{username}} {{password}} -->
                             <input class="form-control" type="hidden" name="username" value={{username}}>
@@ -150,6 +150,16 @@
                             <hr class="my-4">
                             <button class="btn btn-lg btn-primary" type="submit">다음으로</button>
                         </form>
+                        
+                        <br/>
+                        <form class="needs-validation" method="POST" action="/account/register_3" novalidate>
+                            <input class="form-control" type="hidden" name="username" value={{username}}>
+                            </input>
+                            <input class="form-control" type="hidden" name="password" value={{password}}>
+                            </input>
+                            <button class="btn btn-warning" type="submit">다시 업로드</button>
+                        </form>
+
                     </div>
                 </div>
               </div>

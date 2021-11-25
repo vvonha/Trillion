@@ -8,6 +8,8 @@ from server_controller.user_setting import User
 import os
 import random
 
+from app import texting
+
 # https 만을 지원하는 기능을 http 에서 테스트할 때 필요한 설정
 # os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
@@ -58,3 +60,34 @@ def app_before_request():
     
 # if __name__ == '__main__':
 #     app.run(host='0.0.0.0', port='5000', debug=True)
+
+
+# ---------------------------------------------------------------------------------------
+@app.route('/scan_page', methods=['GET','POST'])
+def scan_page():
+    username=request.form['username']
+    password=request.form['password']
+    
+    return render_template('scan.html', username=username, password=password)
+
+@app.route('/scan', methods=['GET','POST'])
+def scan(): 
+    username=request.form['username']
+    password=request.form['password']
+    
+    print('# 스캔 로직 작동중...')
+    
+    file = request.files['file']
+    file_and_path = os.path.join('./', file.filename)
+    file.save(file_and_path)
+    print('# 업로드 완료...')
+    
+    # opened_file = open(file_and_path, 'r', encoding='UTF8')
+    # text=''.join(opened_file.readlines())
+    # text=opened_file.readlines()
+    # print(text)
+    temp = texting(file_and_path)
+    print(temp)
+    print('# 텍스팅 처리 완료...')
+    
+    return redirect(url_for('account.register_level_3_temp_2', username=username, password=password, temp=temp))

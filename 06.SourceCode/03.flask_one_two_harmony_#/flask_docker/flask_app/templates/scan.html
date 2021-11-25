@@ -7,9 +7,16 @@
   <body class="bg-light" onload="check_completed();">
       <div class="container">
           <form class="needs-validation" method="POST" action="/scan" enctype="multipart/form-data" novalidate>
+
+                <!-- {{username}} {{password}} -->
+                <input class="form-control" type="hidden" name="username" value={{username}}>
+                </input>
+                <input class="form-control" type="hidden" name="password" value={{password}}>
+                </input>
+
                 <div>
                   <label for="formFile" class="form-label">보유한 진단서를 업로드해주세요</label>
-                  <br/>
+                  <br/> 
                   <input class="form-control" type="file" id="formFile" name="file" required>
                   </input>
                 </div>
