@@ -3,7 +3,7 @@ version: "3"
 services:
   nginxproxy:
     depends_on:
-      - nginx
+      #- nginx
     image: nginx:alpine
     container_name: proxyserver 
     restart: always 
