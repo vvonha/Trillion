@@ -9,7 +9,7 @@ services:
     restart: always 
     ports:
       - "80:80"
-      - "5000:5000"
+      #- "5000:5000"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./myweb:/usr/share/nginx/html
