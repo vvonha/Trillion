@@ -72,10 +72,11 @@ def scan_page():
 
 @app.route('/scan', methods=['GET','POST'])
 def scan(): 
-    username=request.args.get('username', type = str)
-    password=request.args.get('password', type = str)
-    # username=request.form['username']
-    # password=request.form['password']
+    return redirect('/service/')
+    # username=request.args.get('username', type = str)
+    # password=request.args.get('password', type = str)
+    username=request.form['username']
+    password=request.form['password']
     
     print('# 스캔 로직 작동중...')
     file = request.files['file']
