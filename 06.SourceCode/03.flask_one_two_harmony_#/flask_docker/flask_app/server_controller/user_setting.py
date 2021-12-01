@@ -39,7 +39,7 @@ class User(UserMixin):
         
         sql = """SELECT * \
                 FROM user_data_table \
-                WHERE user = HEX(AES_ENCRYPT('%s', '%s'))""" % (str(username), MY_SALT_VALUE)
+                WHERE user = AES_ENCRYPT('%s', '%s')""" % (str(username), MY_SALT_VALUE)
         # sql = """SELECT * \
         #         FROM user_data_table \
         #         WHERE user = '%s'""" % (str(username))
@@ -81,9 +81,9 @@ class User(UserMixin):
         mysql_db = conn_mysqldb()
         mysql_db_cursor = mysql_db.cursor()
         
-        sql = """SELECT id, AES_DECRYPT(UNHEX(user), '%s'), pw
+        sql = """SELECT id, AES_DECRYPT(user, '%s'), pw
                 FROM user_data_table
-                WHERE user = HEX(AES_ENCRYPT('%s', '%s'))
+                WHERE user = AES_ENCRYPT('%s', '%s')
                 and pw = SHA2('%s', 256);""" % (MY_SALT_VALUE, str(username), MY_SALT_VALUE, str(password))
         # sql = """SELECT id, user, pw
         #         FROM user_data_table
@@ -98,8 +98,9 @@ class User(UserMixin):
             return None
         # print('user:', user)
         # username = user[1].decode('utf8')
-        # user = User(id=user[0], username=username, password=user[2])
-        user = User(id=user[0], username=user[1], password=user[2])
+        user = User(id=user[0], username=username, password=user[2])
+        print("@HEX_TEST:",username)
+        # user = User(id=user[0], username=user[1], password=user[2])
         return user
    
     @staticmethod
@@ -108,7 +109,7 @@ class User(UserMixin):
         mysql_db_cursor = mysql_db.cursor()
                 
         sql = """INSERT INTO user_data_table (user, pw)
-        VALUES (HEX(AES_ENCRYPT('%s', '%s')), SHA2('%s',256) );""" % (str(username), MY_SALT_VALUE, str(password))
+        VALUES ((AES_ENCRYPT('%s', '%s')), SHA2('%s',256) );""" % (str(username), MY_SALT_VALUE, str(password))
         
         # sql = """INSERT INTO user_data_table (user, pw) \
         #         VALUES ('%s', '%s') """ % (str(username), str(password))

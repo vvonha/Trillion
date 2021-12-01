@@ -74,7 +74,8 @@ def home():
     print('home :', current_user.is_authenticated)
     if current_user.is_authenticated:
         print('@성공 : 확인 요망 !!')
-        print('@username:',current_user.username)
+        print('@username:',current_user.id,':',User.get(current_user.id)) # .decode('ascii')
+        print('@username:',current_user.username) # .decode('ascii')
         return render_template('signin.html', username=current_user.username)
     else:
         return render_template('signin.html')
