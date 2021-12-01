@@ -122,7 +122,15 @@ def register_level_2():
 @acc_obj.route('/examine_id_value', methods=['GET','POST']) # 접속할 URL
 def examine_id_value():
     username=request.form['username']
-    print('\n\nTTTTTTEST:',username,'\n\n')
+    print('TEST:',username)
+    
+    # +++ Exception (1) +++  
+    new_s = re.sub(r"[^a-zA-Z0-9]","",username)
+    if username!=new_s or len(username)<6:
+        print('아이디 에러:'+new_s)
+        return render_template('/register/reg_step_2.html', sort=3, username='-')
+    
+    # +++ Exception (2) +++
     user=User.find(username)
     print(user)
     if(user == None):
