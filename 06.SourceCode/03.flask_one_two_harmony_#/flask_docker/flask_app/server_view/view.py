@@ -28,21 +28,36 @@ def signin():
         username=request.form['username']
         password=request.form['password']
         
-        # +++ Exception +++
-        if username.find('\'') >= 0 or username.find('\"') >= 0 or password.find('\'') >= 0 or password.find('\"') >= 0:
-            username = username.replace('\'','')
-            password = password.replace('\'','')
-            # --- --- --- --- ---
-            username = username.replace('\"','')
-            password = password.replace('\"','')
-            return render_template('signin.html', warning='사용 불가능한 문자가 섞여있습니다.', remainUser=username)
-        else:
-            user = User.examine(username, password)
+        # [1] +++ re:TEST +++
+        strs = [username, password] # 검증할 문자열
+        # p = re.compile('^[a-zA-Z0-9+-_.].{6,}$')
+        # p = re.compile('^(?=.*?[a-zA-Z])(?=.*?[0-9]).{6,}$')
+        # p = re.compile('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')
+        # p = re.compile('^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
+        # emails = ['python@mail.example.com', 'python+kr@example.com',
+        #         'python-dojang@example.co.kr', 'python_10@example.info',
+        #         'python.dojang@e-xample.com',
+        #         '@example.com', 'python@example', 'python@example-com']   # 잘못된 형식
+        # for s in strs:
+        #     print(p.match(s) != None, end=' ')
+        #     print()
         
-        # try :
-        #     user = User.examine(username, password)
-        # except Exception as e:
-        #     print('입력 단계에서 예외가 발생했습니다.', e)
+        # [2] +++ Exception +++
+        new_s = re.sub(r"[^a-zA-Z0-9]","",username)
+        if username!=new_s:
+            print('아이디 에러:'+new_s)
+            return render_template('signin.html', warning='아이디를 다시 확인해주세요.', remainUser=username)
+        new_s=''
+        new_s = re.sub(r"[^a-zA-Z0-9#?!@$%^&*-]","",password)
+        if password!=new_s:
+            print('패스워드 에러:'+new_s)
+            return render_template('signin.html', warning='비밀번호를 다시 확인해주세요.', remainUser=username)
+        # for s in strs:
+        #     new_s = re.sub(r"[^a-zA-Z0-9]","",s)
+        #     if s!=new_s:
+        #         print('invalid:'+new_s)
+        #         return render_template('signin.html', warning='사용 불가능한 문자가 섞여있습니다.', remainUser=username)
+        user = User.examine(username, password)
         
         if(user == None):
             return render_template('signin.html', warning='아이디 및 비밀번호 오류입니다', remainUser=username)
@@ -59,6 +74,7 @@ def home():
     print('home :', current_user.is_authenticated)
     if current_user.is_authenticated:
         print('@성공 : 확인 요망 !!')
+        print('@username:',current_user.username)
         return render_template('signin.html', username=current_user.username)
     else:
         return render_template('signin.html')
