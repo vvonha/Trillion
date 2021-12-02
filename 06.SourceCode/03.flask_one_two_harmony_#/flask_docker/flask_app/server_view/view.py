@@ -46,26 +46,48 @@ def signin():
         new_s = re.sub(r"[^a-zA-Z0-9]","",username)
         if username!=new_s:
             print('아이디 에러:'+new_s)
-            return render_template('signin.html', warning='아이디를 다시 확인해주세요.', remainUser=username)
+            return render_template('signin.html', warning='아이디에 사용 불가능한 문자가 있습니다.', remainUser=username)
         new_s=''
-        new_s = re.sub(r"[^a-zA-Z0-9#?!@$%^&*-]","",password)
+        new_s = re.sub(r"[^a-zA-Z0-9#?!@$%^&*-]","",password) # eliminate +
         if password!=new_s:
             print('패스워드 에러:'+new_s)
-            return render_template('signin.html', warning='비밀번호를 다시 확인해주세요.', remainUser=username)
+            return render_template('signin.html', warning='비밀번호에 사용 불가능한 문자가 있습니다.', remainUser=username)
+        
         # for s in strs:
         #     new_s = re.sub(r"[^a-zA-Z0-9]","",s)
         #     if s!=new_s:
         #         print('invalid:'+new_s)
         #         return render_template('signin.html', warning='사용 불가능한 문자가 섞여있습니다.', remainUser=username)
-        user = User.examine(username, password)
         
-        if(user == None):
-            return render_template('signin.html', warning='아이디 및 비밀번호 오류입니다', remainUser=username)
-        else:
+        user = User.examine(username, password)
+        if(username == ''):
+            return render_template('signin.html', warning='아이디를 한 글자 이상 입력해주세요.', remainUser=username)
+        
+        if(User.find(username) == None and user == None):
+            return render_template('signin.html', warning='존재하지 않는 아이디입니다', remainUser=username)
+        
+        elif(user != None):
+            # print('@로그인 성공 =0 (미구현) :',User.set_tryCnt(username))
             login_user(user, remember=True, duration=datetime.timedelta(minutes=5))
             print('@logged in !!')
+            
+            # Test code (cleaning a cnt)
+            warnMsg=User.set_tryCnt(username, True)[0].decode('utf8')
+            
             return render_template('signin.html', username=username)
             # return redirect(url_for('service.home'), username=username)
+        
+        elif(User.find(username) != None):
+            warnMsg=User.set_tryCnt(username)[0].decode('utf8')
+            if int(warnMsg) >= 5:
+                print('잠금')
+                return render_template('signin.html', warning='비밀번호 시도 횟수 제한(5회)을 초과하셨습니다.\n관리자에게 문의주세요.(010-9934-9797)', ban=True)
+            print('@비밀번호 실패:',warnMsg,'회')
+            print(username)
+            return render_template('signin.html', warning='비밀번호 실패 %s회. (5회 계정 잠금)'%(warnMsg), remainUser=username)
+        
+        else:
+            return render_template('signin.html', warning='*에러 발생. 조치 필요!', remainUser=username)
         
         # return render_template('signin.html', username=username)
 
@@ -76,6 +98,7 @@ def home():
         print('@성공 : 확인 요망 !!')
         print('@username:',current_user.id,':',User.get(current_user.id)) # .decode('ascii')
         print('@username:',current_user.username) # .decode('ascii')
+        print('@12.02.TEST:',User.get_user(current_user), User.get_id(current_user))
         return render_template('signin.html', username=current_user.username)
     else:
         return render_template('signin.html')

@@ -61,6 +61,31 @@
       </a>
       <p class="mt-5 mb-3 text-muted">&copy; SK shieldus</p>
     </main>
+
+    {% elif (ban) %}
+    <main class="form-signin">
+
+      <form method="POST" action="/service/signin">
+        <a href="/service/home">
+          <img class="mb-4" src="/static/images/skhealers_logo.png" alt="" width="250" height="113">
+        </a>
+
+        {% if warning != null %}
+        <h5>{{ warning }}</h5>
+        <b style="color:red">다른 계정으로 로그인 해주세요</b>
+        {% else %}
+        <b style="color:red">버그 발생!</b>
+        <b>다른 계정으로 로그인 해주세요</b>
+        {% endif %}
+
+      <br/>
+
+      <a class="w-100 btn btn-lg btn-warning" href="/account/register_1" type="submit">
+        회원가입
+      </a>
+
+      <p class="mt-5 mb-3 text-muted">&copy; SK shieldus</p>
+    </main>
     
     {% else %}
     <main class="form-signin">

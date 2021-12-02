@@ -1,0 +1,20 @@
+QOH SAWS
+
+YONGIN SEVERANCE HOSPITAL
+
+Hospital Medical Report
+
+This form is to be completed by the patient's hospital doctor
+Private & Confidential
+
+---------------------------------------------
+Patient's Name: David
+Date of birth: 1996-09-11
+Ward: None
+Hospital: SNU Hospital
+Consultant: Cindy
+---------------------------------------------
+
+Dear Doctor
+The above patient, who is currently an in-patient under your care, is due to be
+admitted to one of our care homes. In order that we can safely look after him/her,
