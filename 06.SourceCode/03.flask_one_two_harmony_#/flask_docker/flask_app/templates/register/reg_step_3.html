@@ -112,10 +112,16 @@
 
                     <form class="needs-validation" method="POST" action="/account/register_3_validation" enctype="multipart/form-data" novalidate>
                         <div>
-                          
-                          
                           <input class="form-control" type="file" id="formFile" name="file" required>
                           </input>
+
+                          {% if (warning != null) %}
+                          <small style="color:red"> 업로드 가능 확장자 : .png .txt .docx</small>
+                          <div class="alert alert-danger" role="alert">
+                            {{ warning }}
+                          </div>
+                          {% endif %}
+
                           <div class="invalid-feedback">
                               필수 제공 항목입니다.
                           </div>
@@ -140,11 +146,7 @@
                                 필수 동의 항목입니다.
                             </div>
                         </div>
-                        <h4 style="color:red">{{ warn_msg }}</h4>
-                        {% if (warn_msg != null) %}
-                        <h4 style="color:red">{{ warn_msg }}</h4>
-                        {% endif %}
-
+                        
                         <hr class="my-4">
                         <button class="btn btn-warning" type="submit">진단서 내용 검증</button>
                     </form>

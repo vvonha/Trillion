@@ -168,9 +168,9 @@ def examine_id_value():
 
 @acc_obj.route('/register_3', methods=['GET','POST']) # 접속할 URL
 def register_level_3():
-    print('level = 3')
-    print('username : ', request.form['username'])
-    print('password : ', request.form['password'])
+    # print('level = 3')
+    # print('username : ', request.form['username'])
+    # print('password : ', request.form['password'])
     username=request.form['username']
     password=request.form['password']
     
@@ -323,4 +323,6 @@ def register_complete():
     print('password : ', request.form['password'])
     username=request.form['username']
     password=request.form['password']
-    return render_template('signin.html', username=username, password=password)
+    # return render_template('signin.html', username=username, password=password, remainUser=username
+    return render_template('signin.html', remainUser=username)
+    # (위 remainUser 미작동 - 해결 필요)
