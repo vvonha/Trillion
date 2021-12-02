@@ -15,8 +15,8 @@ import pymysql
 # )
 
 # skshieldus_setting
-MYSQL_HOST = 'database-1.cpoaafcf6ree.ap-northeast-2.rds.amazonaws.com'
-# MYSQL_HOST = 'healers-db-instance-1.cp54nqphq6gx.ap-northeast-2.rds.amazonaws.com'
+# MYSQL_HOST = 'database-1.cpoaafcf6ree.ap-northeast-2.rds.amazonaws.com'
+MYSQL_HOST = 'healers-db-instance-1.cp54nqphq6gx.ap-northeast-2.rds.amazonaws.com'
 MYSQL_CONN = pymysql.connect(
     host=MYSQL_HOST,
     port=3306,
