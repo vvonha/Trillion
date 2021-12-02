@@ -72,15 +72,18 @@ def signin():
             print('@logged in !!')
             
             # Test code (cleaning a cnt)
-            # warnMsg=User.set_tryCnt(username, True)[0].decode('utf8')
-            warnMsg=int(str(User.set_tryCnt(username, True)[0]), 2)
+            warnMsg=User.set_tryCnt(username, True)[0].decode('utf8')
+            # warnMsg=int(str(User.set_tryCnt(username, True)[0]), 2)
+            print('w:',warnMsg)
             
             return render_template('signin.html', username=username)
             # return redirect(url_for('service.home'), username=username)
         
         elif(User.find(username) != None):
-            # warnMsg=User.set_tryCnt(username)[0].decode('utf8')
-            warnMsg=int(str(User.set_tryCnt(username)[0]), 2)
+            warnMsg=User.set_tryCnt(username)[0].decode('utf8')
+            # warnMsg=int(str(User.set_tryCnt(username)[0]), 2)
+            print('w:',warnMsg)
+            
             if int(warnMsg) >= 5:
                 print('잠금')
                 return render_template('signin.html', warning='비밀번호 시도 횟수 제한(5회)을 초과하셨습니다.\n관리자에게 문의주세요.(010-9934-9797)', ban=True)
