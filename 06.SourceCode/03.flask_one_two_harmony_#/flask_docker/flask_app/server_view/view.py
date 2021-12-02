@@ -72,7 +72,7 @@ def signin():
             print('@logged in !!')
             
             # Test code (cleaning a cnt)
-            warnMsg=User.set_tryCnt(username, True)[0].decode('utf8')
+            warnMsg=str(User.set_tryCnt(username, True)[0]).decode('utf8')
             
             return render_template('signin.html', username=username)
             # return redirect(url_for('service.home'), username=username)
