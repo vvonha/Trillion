@@ -72,7 +72,7 @@ def signin():
             print('@logged in !!')
             
             # Test code (cleaning a cnt)
-            warnMsg=User.set_tryCnt(username, True)[0]
+            warnMsg=int(User.set_tryCnt(username, True)[0]) # 취약점 확인
             # warnMsg=int(str(User.set_tryCnt(username, True)[0]), 2)
             print('w:',warnMsg)
             
@@ -80,7 +80,7 @@ def signin():
             # return redirect(url_for('service.home'), username=username)
         
         elif(User.find(username) != None):
-            warnMsg=User.set_tryCnt(username)[0]
+            warnMsg=int(User.set_tryCnt(username)[0]) # 취약점 확인
             # warnMsg=int(str(User.set_tryCnt(username)[0]), 2)
             print('w:',warnMsg)
             
