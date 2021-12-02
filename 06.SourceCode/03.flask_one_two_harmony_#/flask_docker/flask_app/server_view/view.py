@@ -209,7 +209,8 @@ def register_level_3_temp():
     name, ext = os.path.splitext(file.filename)
     # print('F-name:', name)
     print('F-ext:', ext)
-    if (ext != '.png') and (ext != '.txt') and (ext != '.docx'):
+    # if (ext != '.png') and (ext != '.txt') and (ext != '.docx'):
+    if (ext != '.txt'):
         print('@#$지원하지 않는 파일 형식 발견!')
         return render_template('/register/reg_step_3.html', warning='지원되지 않는 파일 형식입니다.', username=username, password=password)
     
