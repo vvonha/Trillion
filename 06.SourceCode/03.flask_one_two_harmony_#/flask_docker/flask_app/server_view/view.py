@@ -126,7 +126,7 @@ def examine_id_value():
     
     # +++ Exception (1) +++  
     new_s = re.sub(r"[^a-zA-Z0-9]","",username)
-    if username!=new_s or len(username)<6:
+    if username!=new_s or len(username)<=6:
         print('아이디 에러:'+new_s)
         return render_template('/register/reg_step_2.html', sort=3, username='-')
     

@@ -1,6 +1,7 @@
 from flask_login import UserMixin
 from pymysql import NULL
 from server_model.mysql import conn_mysqldb
+import re
 
 MY_SALT_VALUE = 'SKSHIELDUS'
 
@@ -14,6 +15,14 @@ class User(UserMixin):
     def get_id(self):
         return str(self.id)
  
+    # +++ Exception (1) +++  
+    def rm_vul_str(self, e):
+        new_e = re.sub(r"[^a-zA-Z0-9]","",e)
+        if e!=new_e or len(e)<=6:
+            print('@@@에러:'+new_e)
+        else:
+            return new_e
+        
     @staticmethod
     def get(id):
         print('\n@GET:','get','\n')
