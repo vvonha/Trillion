@@ -217,7 +217,7 @@ def register_level_3_temp():
     file_and_path = os.path.join('./', file.filename)
     
     # *--* 취약점 -제거- 필요
-    # file.save(file_and_path) 
+    file.save(file_and_path) 
     # return 'file uploaded successfully'
     
     opened_file = open(file_and_path, 'r', encoding='UTF8')
