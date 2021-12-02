@@ -192,7 +192,8 @@ def examine(text, str, start_idx, end_str):
             print(examined); print()
             return(examined)
             # print(text[i+len("Patient's Name: "):text.find(' ',i)])
-            
+
+# 현재 사용중 (12-02)            
 @acc_obj.route('/register_3_validation', methods=['GET','POST']) # 접속할 URL
 def register_level_3_temp():
     print('level = 3_temp')
@@ -203,10 +204,21 @@ def register_level_3_temp():
     
     # Test Code
     file = request.files['file']
+    
+    # *취약점 제거 코드 (파일 확장자 검증)
+    name, ext = os.path.splitext(file.filename)
+    # print('F-name:', name)
+    print('F-ext:', ext)
+    if (ext != '.png') and (ext != '.txt') and (ext != '.docx'):
+        print('@#$지원하지 않는 파일 형식 발견!')
+        return render_template('/register/reg_step_3.html', warning='지원되지 않는 파일 형식입니다.', username=username, password=password)
+    
     # file_and_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
     file_and_path = os.path.join('./', file.filename)
-    file.save(file_and_path)
-    #return 'file uploaded successfully'
+    
+    # *--* 취약점 -제거- 필요
+    # file.save(file_and_path) 
+    # return 'file uploaded successfully'
     
     opened_file = open(file_and_path, 'r', encoding='UTF8')
     text=''.join(opened_file.readlines())
@@ -232,7 +244,6 @@ def register_level_3_temp():
     Ward=examine(text, "Ward:", 100, "Hospital:")
     Hospital=examine(text, "Hospital:", 100, "Consultant:")
     Consultant=examine(text, "Consultant:", 100, "\n")
-    
     
     # result(검증 문자열) 추가된 것 확인
     return render_template('/register/reg_step_3_valid.html', username=username, password=password, 

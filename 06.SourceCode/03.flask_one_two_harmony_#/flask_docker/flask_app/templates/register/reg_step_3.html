@@ -140,6 +140,10 @@
                                 필수 동의 항목입니다.
                             </div>
                         </div>
+                        <h4 style="color:red">{{ warn_msg }}</h4>
+                        {% if (warn_msg != null) %}
+                        <h4 style="color:red">{{ warn_msg }}</h4>
+                        {% endif %}
 
                         <hr class="my-4">
                         <button class="btn btn-warning" type="submit">진단서 내용 검증</button>
