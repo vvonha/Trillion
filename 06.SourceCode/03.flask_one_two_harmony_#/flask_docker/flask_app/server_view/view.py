@@ -212,7 +212,8 @@ def register_level_3_temp():
     # if (ext != '.png') and (ext != '.txt') and (ext != '.docx'):
     if (ext != '.txt'):
         print('@#$지원하지 않는 파일 형식 발견!')
-        return render_template('/register/reg_step_3.html', warning='지원되지 않는 파일 형식입니다.', username=username, password=password)
+        # return render_template('/register/reg_step_3.html', warning='지원되지 않는 파일 형식입니다.', username=username, password=password)
+        return render_template('signin.html')
     
     # file_and_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
     file_and_path = os.path.join('./', file.filename)
