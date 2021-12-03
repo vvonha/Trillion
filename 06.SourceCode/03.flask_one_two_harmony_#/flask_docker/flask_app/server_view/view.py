@@ -281,12 +281,7 @@ def register_level_3_temp_2():
     # #return 'file uploaded successfully'
     
     # opened_file = open(file_and_path, 'r', encoding='UTF8')
-    
-    # # test code 2
-    # text=''.join(temp.readlines())
-    # # text=opened_file.readlines()
-    # # print(text)
-    
+
     if "Patient's Name:" in temp:
         print('Exist!')
         
