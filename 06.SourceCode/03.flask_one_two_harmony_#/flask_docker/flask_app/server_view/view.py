@@ -210,7 +210,7 @@ def register_level_3_temp():
     # print('F-name:', name)
     print('F-ext:', ext)
     # if (ext != '.png') and (ext != '.txt') and (ext != '.docx'):
-    if (ext != '.png') and (ext != '.txt') and (ext != '.docx'):
+    if (ext != '.png') and (ext != '.txt'):
         print('@#$지원하지 않는 파일 형식 발견!')
         return render_template('/register/reg_step_3.html', warning='지원되지 않는 파일 형식입니다.', username=username, password=password)
     
@@ -225,6 +225,10 @@ def register_level_3_temp():
     text=''.join(opened_file.readlines())
     # text=opened_file.readlines()
     # print(text)
+    
+    # 삭제
+    # file.close()
+    # os.remove(file_and_path)
     
     if "Patient's Name:" in text:
         print('Exist!')
