@@ -1,32 +1,32 @@
 import pymysql
 
-# user_info_table
-MYSQL_HOST = 'database-1.cpoaafcf6ree.ap-northeast-2.rds.amazonaws.com'
-# MYSQL_HOST = 'healers-db-instance-1.cp54nqphq6gx.ap-northeast-2.rds.amazonaws.com'
-MYSQL_CONN = pymysql.connect(
-    host=MYSQL_HOST,
-    port=3306,
-    user='admin',
-    # user='healers',
-    passwd='Password!',
-    # passwd='Trillion!',
-    db='user_data_schema',
-    charset='utf8'
-)
-
-# # skshieldus_setting
-# # MYSQL_HOST = 'database-1.cpoaafcf6ree.ap-northeast-2.rds.amazonaws.com'
-# MYSQL_HOST = 'healers-db-instance-1.cp54nqphq6gx.ap-northeast-2.rds.amazonaws.com'
+# # user_info_table
+# MYSQL_HOST = 'database-1.cpoaafcf6ree.ap-northeast-2.rds.amazonaws.com'
+# # MYSQL_HOST = 'healers-db-instance-1.cp54nqphq6gx.ap-northeast-2.rds.amazonaws.com'
 # MYSQL_CONN = pymysql.connect(
 #     host=MYSQL_HOST,
 #     port=3306,
-#     # user='admin',
-#     user='healers',
-#     # passwd='Password!',
-#     passwd='Trillion!',
+#     user='admin',
+#     # user='healers',
+#     passwd='Password!',
+#     # passwd='Trillion!',
 #     db='user_data_schema',
 #     charset='utf8'
 # )
+
+# skshieldus_setting
+# MYSQL_HOST = 'database-1.cpoaafcf6ree.ap-northeast-2.rds.amazonaws.com'
+MYSQL_HOST = 'healers-db-instance-1.cp54nqphq6gx.ap-northeast-2.rds.amazonaws.com'
+MYSQL_CONN = pymysql.connect(
+    host=MYSQL_HOST,
+    port=3306,
+    # user='admin',
+    user='healers',
+    # passwd='Password!',
+    passwd='Trillion!',
+    db='user_data_schema',
+    charset='utf8'
+)
 
 def conn_mysqldb():
     if not MYSQL_CONN.open:
