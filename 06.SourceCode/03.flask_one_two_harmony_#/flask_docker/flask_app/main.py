@@ -35,6 +35,10 @@ app.config['UPLOAD_FOLDER'] = './'
 def home():
     return redirect('/service/')
 
+@app.errorhandler(403)
+def error_403(error):
+  return render_template('/error/error.html')
+
 # @login_manager.user_loader:
 # def load_user(user_id):
 #     print('\n@user_id:',user_id,'\n')
