@@ -96,6 +96,10 @@ def signin():
         
         # return render_template('signin.html', username=username)
 
+@main_obj.errorhandler(403)
+def error_403(error):
+  return render_template('/error/error2.html')
+
 @main_obj.route('/home')
 def home():
     print('home :', current_user.is_authenticated)
